@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  BragiDemo
+
+  Created by Nikita Skobelkin on 25/07/2023.
+  
+*/
+
+"movie" = "Movie";
+"tv" = "TV";
