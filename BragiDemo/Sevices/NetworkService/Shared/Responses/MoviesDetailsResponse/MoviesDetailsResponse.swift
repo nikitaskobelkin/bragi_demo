@@ -8,6 +8,6 @@
 import Foundation
 
 struct MoviesDetailsResponse: Codable {
-    let budget: Int
-    let revenue: Int
+    let budget: Int?
+    let revenue: Int?
 }

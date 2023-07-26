@@ -35,6 +35,7 @@ class LibraryViewModel: ObservableObject {
                 guard selectedFilter == nil else { break }
                 selectedFilter = filters.first
             case .failure:
+                // nandle here any errors by use-cases
                 break
             }
             isLoading = false
@@ -60,7 +61,6 @@ class LibraryViewModel: ObservableObject {
                     .compactMap {
                         guard let id = $0.id else { return nil }
                         guard let title = contentType == .movies ? $0.title : $0.name else { return nil }
-                        // MARK: For image we must use Caching mechanism, now i just don't have time for it :(
                         return MovieItem(
                             id: id,
                             imagePath: $0.posterPath,
@@ -70,8 +70,9 @@ class LibraryViewModel: ObservableObject {
                     }
                 items.append(contentsOf: newMovies)
                 pagination += 1
-            case let .failure(error):
-                print(error)
+            case .failure:
+                // nandle here any errors by use-cases
+                break
             }
             isLazyLoading = false
         }

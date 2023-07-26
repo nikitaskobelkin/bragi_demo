@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct RootView: View {
+    let libraryComponent: LibraryComponentProtocol
+
     var body: some View {
         TabView {
-            ViewsFactory.build(.library(.movies))
+            libraryComponent.buildView(contentType: .movies)
                 .tabItem {
                     Label(Localization.movie.value, systemImage: "film")
                 }
-            ViewsFactory.build(.library(.tv))
+            libraryComponent.buildView(contentType: .tv)
                 .tabItem {
                     Label(Localization.movie.value, systemImage: "play.tv")
                 }

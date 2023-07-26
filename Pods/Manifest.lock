@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.7.1)
+  - NeedleFoundation (0.17.2)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -10,6 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.7.0)
+  - NeedleFoundation
   - RxCocoa (= 6.5.0)
   - RxSwift (= 6.5.0)
   - SwiftUIIntrospect
@@ -17,6 +19,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - NeedleFoundation
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -24,11 +27,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  NeedleFoundation: 36cfaea9ae9eb527a796f5c1df19296c722666b8
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SwiftUIIntrospect: 6e17d518778c28c8fad15e15572be841d300af52
 
-PODFILE CHECKSUM: 3c7b2e8d0a83fbf74d32360927a446ca196a1f67
+PODFILE CHECKSUM: 0814df8c41cba82569fcf3988ba1878a6f54cb55
 
 COCOAPODS: 1.12.1
