@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct BragiDemoApp: App {
+    init() {
+        registerProviderFactories()
+    }
+
     var body: some Scene {
         WindowGroup {
-            ViewsFactory.build(.root)
+            RootComponent().rootView
         }
     }
 }

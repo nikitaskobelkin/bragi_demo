@@ -14,7 +14,7 @@ struct TVShowsDetailsResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case lastAirDate = "last_air_date"
         case lastEpisodeToAir = "last_episode_to_air"
-        }
+    }
 }
 
 struct EpisodeToAir: Codable {

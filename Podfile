@@ -4,4 +4,5 @@ target 'BragiDemo' do
   pod 'SwiftUIIntrospect'
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
+  pod 'NeedleFoundation'
 end

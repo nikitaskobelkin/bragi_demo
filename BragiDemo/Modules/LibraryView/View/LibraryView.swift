@@ -9,8 +9,11 @@ import SwiftUI
 
 struct LibraryView: View {
     @ObservedObject var viewModel: LibraryViewModel
+    let mediaItemComponent: MediaItemComponentProtocol
     private let columns: [GridItem] = Array(
-        repeating: GridItem(.flexible(), spacing: 0), count: 2)
+        repeating: GridItem(.flexible(), spacing: 0),
+        count: 2
+    )
 
     var body: some View {
         VStack {
@@ -22,21 +25,12 @@ struct LibraryView: View {
             }
             ScrollView {
                 LazyVGrid(columns: columns, spacing: .x2) {
-                    switch viewModel.contentType {
-                    case .movies:
-                        MoviesListView(
-                            items: viewModel.items,
-                            onAppear: {
+                    ForEach(viewModel.items, id: \.self) { item in
+                        mediaItemComponent.buildView(item: item, contentType: viewModel.contentType)
+                            .onAppear {
+                                guard viewModel.items.last == item else { return }
                                 viewModel.fetchMovies(refresh: false)
                             }
-                        )
-                    case .tv:
-                        TVListView(
-                            items: viewModel.items,
-                            onAppear: {
-                                viewModel.fetchMovies(refresh: false)
-                            }
-                        )
                     }
                 }
                 .padding(.all, .x3)
