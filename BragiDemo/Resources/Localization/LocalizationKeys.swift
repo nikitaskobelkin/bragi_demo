@@ -10,6 +10,14 @@ import SwiftUI
 enum Localization: String {
     case movie
     case tv
+    case oops
+    case connectErrorTxt
+    case retry
+    case cancel
+    case title
+    case rating
+    case budget
+    case revenue
 }
 
 // MARK: - Localization value

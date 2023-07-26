@@ -8,3 +8,11 @@
 
 "movie" = "Movie";
 "tv" = "TV";
+"oops" = "Oops!";
+"connectErrorTxt" = "Check your internet connection. Try again later!";
+"retry" = "Retry";
+"cancel" = "Cancel";
+"title" = "Title";
+"rating" = "Rating";
+"budget" = "Budget";
+"revenue" = "Revenue";
