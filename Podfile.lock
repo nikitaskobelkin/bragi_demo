@@ -1,16 +1,20 @@
 PODS:
   - Alamofire (5.7.1)
+  - SwiftUIIntrospect (0.10.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.7.0)
+  - SwiftUIIntrospect
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - SwiftUIIntrospect
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  SwiftUIIntrospect: 6e17d518778c28c8fad15e15572be841d300af52
 
-PODFILE CHECKSUM: f8b2971a2f74ee30e42d3c2d5a02e1cd8a94feca
+PODFILE CHECKSUM: 0036347f89507fcbe6c7ab0825729e4412d3a757
 
 COCOAPODS: 1.12.1
