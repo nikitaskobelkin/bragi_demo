@@ -10,20 +10,14 @@ import SwiftUI
 struct RootView: View {
     var body: some View {
         TabView {
-            LibraryViewBuilder.build(for: .movies)
+            ViewsFactory.build(.library(.movies))
                 .tabItem {
                     Label(Localization.movie.value, systemImage: "film")
                 }
-            LibraryViewBuilder.build(for: .tv)
+            ViewsFactory.build(.library(.tv))
                 .tabItem {
                     Label(Localization.movie.value, systemImage: "play.tv")
                 }
         }
-    }
-}
-
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
     }
 }

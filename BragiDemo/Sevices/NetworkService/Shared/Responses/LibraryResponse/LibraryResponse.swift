@@ -1,5 +1,5 @@
 //
-//  MoviesResponse.swift
+//  LibraryResponse.swift
 //  BragiDemo
 //
 //  Created by Nikita Skobelkin on 25/07/2023.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct MoviesResponse: Codable {
+struct LibraryResponse: Codable {
     let page: Int
-    let results: [MovieData]
+    let results: [LibraryItemData]
     let totalPages, totalResults: Int
 
     enum CodingKeys: String, CodingKey {

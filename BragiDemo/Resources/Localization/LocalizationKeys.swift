@@ -18,6 +18,8 @@ enum Localization: String {
     case rating
     case budget
     case revenue
+    case lastAirDate
+    case lastEpisode
 }
 
 // MARK: - Localization value

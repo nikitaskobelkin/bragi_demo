@@ -11,7 +11,6 @@ import Alamofire
 
 final class NetworkService: NetworkServiceProtocol {
     private let sessionManager: Session
-    private let responseSerializer = BaseDataResponseSerializer()
     private let reachabilityManager = NetworkReachabilityManager()
 
     private let queue: DispatchQueue = .init(

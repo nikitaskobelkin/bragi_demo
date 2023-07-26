@@ -22,12 +22,21 @@ struct LibraryView: View {
             }
             ScrollView {
                 LazyVGrid(columns: columns, spacing: .x2) {
-                    ForEach(viewModel.movies, id: \.self) { item in
-                        MovieItemView(item: item)
-                            .onAppear {
-                                guard viewModel.movies.last == item else { return }
-                                viewModel.fetchMovies(genre: viewModel.selectedFilter?.title ?? "", refresh: false)
+                    switch viewModel.contentType {
+                    case .movies:
+                        MoviesListView(
+                            items: viewModel.items,
+                            onAppear: {
+                                viewModel.fetchMovies(refresh: false)
                             }
+                        )
+                    case .tv:
+                        TVListView(
+                            items: viewModel.items,
+                            onAppear: {
+                                viewModel.fetchMovies(refresh: false)
+                            }
+                        )
                     }
                 }
                 .padding(.all, .x3)
@@ -35,11 +44,14 @@ struct LibraryView: View {
                     ProgressView()
                 }
             }
+            .onRefresh {
+                guard !viewModel.isLoading else { return }
+                viewModel.fetchMovies(refresh: true)
+            }
         }
         .isLoading(viewModel.isLoading)
-        .onChange(of: viewModel.selectedFilter) { value in
-            guard let filter = value else { return }
-            viewModel.fetchMovies(genre: filter.title, refresh: true)
+        .onChange(of: viewModel.selectedFilter) { _ in
+            viewModel.fetchMovies(refresh: true)
         }
         .onAppear {
             viewModel.fetchGenres()
