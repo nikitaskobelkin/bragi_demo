@@ -9,10 +9,9 @@ import SwiftUI
 
 @main
 struct BragiDemoApp: App {
-    private let manager = MovieManager(networkService: NetworkService(sessionManager: .default))
     var body: some Scene {
         WindowGroup {
-            RootView()
+            ViewsFactory.build(.root)
         }
     }
 }

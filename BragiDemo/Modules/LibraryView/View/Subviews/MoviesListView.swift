@@ -13,7 +13,7 @@ struct MoviesListView: View {
 
     var body: some View {
         ForEach(items, id: \.self) { item in
-            MovieItemViewBuilder.build(item: item)
+            ViewsFactory.build(.movieItem(item: item))
                 .onAppear {
                     guard items.last == item else { return }
                     onAppear()

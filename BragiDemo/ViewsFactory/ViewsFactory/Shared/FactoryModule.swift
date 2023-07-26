@@ -12,4 +12,6 @@ import SwiftUI
 enum FactoryModule {
     case root
     case library(_ type: ContentType)
+    case tvItem(item: MovieItem)
+    case movieItem(item: MovieItem)
 }

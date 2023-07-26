@@ -1,5 +1,5 @@
 //
-//  DIContainer.swift
+//  ViewsFactoryProtocol.swift
 //  BragiDemo
 //
 //  Created by Nikita Skobelkin on 26/07/2023.

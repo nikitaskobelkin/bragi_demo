@@ -16,6 +16,10 @@ struct ViewsFactory: ViewsFactoryProtocol {
             RootViewBuilder.build()
         case .library(let contentType):
             LibraryViewBuilder.build(for: contentType)
+        case .movieItem(let item):
+            MovieItemViewBuilder.build(item: item)
+        case .tvItem(item: let item):
+            MovieItemViewBuilder.build(item: item)
         }
     }
 }

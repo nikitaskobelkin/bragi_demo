@@ -13,7 +13,7 @@ struct TVListView: View {
 
     var body: some View {
         ForEach(items, id: \.self) { item in
-            TVShowItemViewBuilder.build(item: item)
+            ViewsFactory.build(.tvItem(item: item))
                 .onAppear {
                     guard items.last == item else { return }
                     onAppear()
