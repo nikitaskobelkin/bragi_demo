@@ -20,8 +20,7 @@ $ pod install
 The iOS app follows the MVVM (Model-View-ViewModel) architectural pattern, incorporating Dependency Injection for handling dependencies and Async/Await for asynchronous operations.
 
 Key Components:
-- DIContainer: A dependency container responsible for providing dependencies to various components of the app. It facilitates loosely coupled components by using protocols and concrete implementations.
-- ViewsFactory: A factory that generates views with the ViewModels, ensuring the separation of concerns and easy testing.
+- Dependency Injection: The project uses NeedleFoundation for dependency injection, allowing for loosely coupled components and easy testability. **Important:** after changes components, you must restart build for generating providers. More info: [Needle GitHub](https://github.com/uber/needle)
 - MVVM Pattern: The app follows the MVVM pattern, where Views display data and events, ViewModels handle business logic and data presentation, and Models represent data and services.
 - Convert RxSwift to Async/Await: The app has replaced RxSwift with Swift's native Async/Await for cleaner and more straightforward asynchronous programming.
 - UI shared: Contains style-related files such as Theme for theming, Modifiers, Colors, and Styles for reusable styles.
