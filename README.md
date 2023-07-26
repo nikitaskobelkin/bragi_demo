@@ -34,5 +34,6 @@ The app uses the following libraries:
 - Introspect: A library that provides SwiftUI extensions to work with UIKit components, enabling easier customization and integration with SwiftUI.
 - Alamofire: A popular networking library for handling API requests and responses, simplifying network calls.
 - RxSwift and RxCocoa: Used previously for reactive programming. However, we've now switched to Swift's native Async/Await for better readability and performance.
+- Needle: Needle is a dependency injection (DI) system for Swift. Unlike other DI frameworks, such as Cleanse, Swinject, Needle encourages hierarchical DI structure and utilizes code generation to ensure compile-time safety. This allows us to develop our apps and make code changes with confidence. If it compiles, it works. In this aspect, Needle is more similar to Dagger for the JVM.
 
 Feel free to explore the codebase and contribute to the project. Happy coding!
