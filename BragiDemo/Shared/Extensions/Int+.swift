@@ -6,7 +6,12 @@
 //
 
 extension Int {
-    var millions: String {
-        "\(self % 1000000) M"
+    var short: String {
+        let cut = 1000000
+        if self / cut > 0 {
+            return "\(self / 1000000) M"
+        } else {
+            return "\(self / 1000) K"
+        }
     }
 }

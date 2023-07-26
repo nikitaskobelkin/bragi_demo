@@ -11,7 +11,7 @@ struct LibraryViewBuilder {
     static func build(for contentType: ContentType) -> some View {
         let viewModel = LibraryViewModel(
             contentType: contentType,
-            movieManager: MovieManager(networkService: NetworkService(sessionManager: .default))
+            movieManager: DIContainer.shared.movieManager
         )
         return LibraryView(viewModel: viewModel)
     }

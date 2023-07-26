@@ -9,20 +9,22 @@ import Alamofire
 import Foundation
 
 struct MoviesRequest: NetworkingRequest {
-    typealias ResponseType = MoviesResponse
+    typealias ResponseType = LibraryResponse
 
     private let page: Int
     private let genre: String
+    private let type: ContentType
 
-    init(page: Int, genre: String) {
+    init(page: Int, genre: Int, type: ContentType) {
         self.page = page
-        self.genre = genre
+        self.genre = "\(genre)"
+        self.type = type
     }
 
     func getRequestDescriptor() -> RequestDescriptor {
         RequestDescriptor(
             baseUrl: NetworkConstants.baseURL,
-            path: NetworkConstants.Paths.movies.rawValue,
+            path: path,
             method: .get,
             headers: [
                 RequestHeaderKey.authorization.rawValue: RequestAccessContent.bearer(
@@ -42,5 +44,12 @@ private extension MoviesRequest {
     enum ParamKey: String {
         case page
         case withGenres = "with_genres"
+    }
+
+    var path: String {
+        switch type {
+        case .movies: return NetworkConstants.Paths.movies.rawValue
+        case .tv: return NetworkConstants.Paths.tvs.rawValue
+        }
     }
 }

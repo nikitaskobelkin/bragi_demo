@@ -16,3 +16,5 @@
 "rating" = "Rating";
 "budget" = "Budget";
 "revenue" = "Revenue";
+"lastAirDate" = "Last air date";
+"lastEpisode" = "Last episode";
