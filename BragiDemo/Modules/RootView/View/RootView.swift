@@ -10,11 +10,11 @@ import SwiftUI
 struct RootView: View {
     var body: some View {
         TabView {
-            Text("1")
+            LibraryViewBuilder.build(for: .movies)
                 .tabItem {
                     Label(Localization.movie.value, systemImage: "film")
                 }
-            Text("2")
+            LibraryViewBuilder.build(for: .tv)
                 .tabItem {
                     Label(Localization.movie.value, systemImage: "play.tv")
                 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
 import Alamofire
 
 final class NetworkService: NetworkServiceProtocol {
@@ -57,25 +57,55 @@ final class NetworkService: NetworkServiceProtocol {
 }
 
 extension NetworkService {
-    func data<T: NetworkingRequest>(_ request: T) -> AnyPublisher<Data, NetworkError> {
-        guard isConnected else { return Fail(error: NetworkError.noConnection).eraseToAnyPublisher() }
-        guard let request = try? createUrlRequest(request) else {
-            return Fail(error: NetworkError.badRequest).eraseToAnyPublisher()
+    func data<T: NetworkingRequest>(_ request: T) -> Observable<Result<Data, NetworkError>> {
+        return Observable<Result<Data, NetworkError>>.create { [weak self] observer in
+            guard let self = self else { return Disposables.create() }
+            guard self.isConnected else {
+                observer.onNext(.failure(.noConnection))
+                observer.onCompleted()
+                return Disposables.create()
+            }
+
+            guard let request = try? self.createUrlRequest(request) else {
+                observer.onNext(.failure(.badRequest))
+                observer.onCompleted()
+                return Disposables.create()
+            }
+
+            let dataRequest = self.sessionManager.request(request)
+                .responseData(queue: self.queue) { response in
+                    switch response.result {
+                    case .success(let data):
+                        observer.onNext(.success(data))
+                        observer.onCompleted()
+                    case .failure(let error):
+                        let networkError = NetworkError.alamofireError(error: error)
+                        observer.onNext(.failure(networkError))
+                        observer.onCompleted()
+                    }
+                }
+
+            return Disposables.create {
+                dataRequest.cancel()
+            }
         }
-        return sessionManager.request(request)
-            .publishResponse(using: responseSerializer, on: queue)
-            .value()
-            .mapError { NetworkError.alamofireError(error: $0) }
-            .eraseToAnyPublisher()
     }
 
-    func json<T: NetworkingRequest>(_ request: T) -> AnyPublisher<T.ResponseType, NetworkError> {
+    func json<T: NetworkingRequest>(_ request: T) -> Observable<Result<T.ResponseType, NetworkError>> {
         return data(request)
-            .compactMap { [weak self] in
-                guard let self = self else { return nil }
-                return try? self.jsonDecoder.decode(T.ResponseType.self, from: $0)
+            .map { [weak self] dataResult in
+                guard let self = self else { return .failure(.invalidError) }
+                switch dataResult {
+                case let .success(data):
+                    do {
+                        let response = try self.jsonDecoder.decode(T.ResponseType.self, from: data)
+                        return .success(response)
+                    } catch {
+                        return .failure(.custom(error))
+                    }
+                case let .failure(networkError):
+                    return .failure(networkError)
+                }
             }
-            .mapError { NetworkError.custom($0) }
-            .eraseToAnyPublisher()
     }
 }
