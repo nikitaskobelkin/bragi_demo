@@ -23,7 +23,7 @@ struct RequestDescriptor {
         path: String = "",
         method: HTTPMethod,
         headers: [String: String] = [:],
-        params: Parameters,
+        params: Parameters = [:],
         encoding: ParameterEncoding
     ) {
         self.baseUrl = baseUrl

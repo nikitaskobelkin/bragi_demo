@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 final class MovieManager: MovieManagerProtocol {
     private let networkService: NetworkServiceProtocol
@@ -17,6 +16,16 @@ final class MovieManager: MovieManagerProtocol {
 
     func getGenres(for contentType: ContentType) async -> Result<GenresResponse, NetworkError> {
         let request = GenresRequest(contentType: contentType)
-        return await networkService.json(request).async()
+        return await doRequest(request)
+    }
+
+    func getMovies(page: Int, genre: String) async -> Result<MoviesResponse, NetworkError> {
+        let request = MoviesRequest(page: page, genre: genre)
+        return await doRequest(request)
+    }
+
+    private func doRequest<T: NetworkingRequest>(_ request: T) async -> Result<T.ResponseType, NetworkError> {
+        guard let value = try? await networkService.json(request).asSingle().value else { return .failure(.unprocessableEntity) }
+        return value
     }
 }

@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
 
 protocol NetworkServiceProtocol {
-    func data<T: NetworkingRequest>(_ request: T) -> AnyPublisher<Data, NetworkError>
-    func json<T: NetworkingRequest>(_ request: T) -> AnyPublisher<T.ResponseType, NetworkError>
+    func data<T: NetworkingRequest>(_ request: T) -> Observable<Result<Data, NetworkError>>
+    func json<T: NetworkingRequest>(_ request: T) -> Observable<Result<T.ResponseType, NetworkError>>
 }

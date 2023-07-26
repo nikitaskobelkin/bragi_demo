@@ -16,20 +16,33 @@ struct LibraryView: View {
         VStack {
             if !viewModel.filters.isEmpty {
                 FiltersView(
-                    selected: $viewModel.selected,
+                    selected: $viewModel.selectedFilter,
                     filter: viewModel.filters
                 )
             }
             ScrollView {
-                LazyVGrid(columns: columns) {
-//                    ForEach(, id: \.self) {
-//                        LibraryItemView(item: $0)
-//                    }
+                LazyVGrid(columns: columns, spacing: .x2) {
+                    ForEach(viewModel.movies, id: \.self) { item in
+                        MovieItemView(item: item)
+                            .onAppear {
+                                guard viewModel.movies.last == item else { return }
+                                viewModel.fetchMovies(genre: viewModel.selectedFilter?.title ?? "", refresh: false)
+                            }
+                    }
+                }
+                .padding(.all, .x3)
+                if viewModel.isLazyLoading {
+                    ProgressView()
                 }
             }
         }
+        .isLoading(viewModel.isLoading)
+        .onChange(of: viewModel.selectedFilter) { value in
+            guard let filter = value else { return }
+            viewModel.fetchMovies(genre: filter.title, refresh: true)
+        }
         .onAppear {
-            viewModel.fetch()
+            viewModel.fetchGenres()
         }
     }
 }

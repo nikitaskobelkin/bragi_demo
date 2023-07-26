@@ -7,4 +7,6 @@
 
 protocol MovieManagerProtocol {
     func getGenres(for contentType: ContentType) async -> Result<GenresResponse, NetworkError>
+    func getMovies(page: Int, genre: String) async -> Result<MoviesResponse, NetworkError>
+//    func getTVShows(for contentType: ContentType) async -> Result<GenresResponse, NetworkError>
 }
